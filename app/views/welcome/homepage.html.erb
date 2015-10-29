@@ -14,7 +14,7 @@
 	    header h1 { font-size: 46px; text-align: center; margin: 15px 10px; }
 	    article h1 { font-size: 26px; margin: 0 0 15px; text-align: left;}
 	  	
-	  	.canvas { background-color:white; width:90%;}
+	  	.canvas { background-color:white; width:95%;}
       .canvas #simple_sketch {
         position:relative;
         width:100%;        
@@ -30,10 +30,19 @@
         	header, h1 {
           	display:none;
         	}
-        	canvas {
-          	width:95%;
+        	.canvas {
+          	width:98%;
         	}
+          
+          .buttons {
+            position:relative;
+            float:left;
+            margin-left:5%;
+            margin-top:2%;
+            z-index:2;
             }
+
+          }
       
 	    
 	    body { background: #222222;}
@@ -52,13 +61,12 @@
 		  	<div class="tools">
 		  		<div class="buttons">
 		  			<center>
-		  			<a href="#simple_sketch" data-tool="marker"><button type="button", class="btn btn-info">Marker</button></a>
-			  		<a href="#simple_sketch" data-tool="eraser"><button type="button", class="btn btn-info">Eraser</button></a>
+		  			<!--<a href="#simple_sketch" data-tool="marker"><button type="button", class="btn btn-info">Marker</button></a>-->
 			  		<a href='#simple_sketch' data-clear='true'><button id ="clear", type="button", class="btn btn-info">Clear</button></a>
 			  	</center>
 			  	   
 		  		</div>
-			</div>
+		
 
 		 	<center>
       <article class="canvas">
@@ -68,6 +76,7 @@
       </div>
       </article>
 			</center>
+      </div>
 
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -114,6 +123,12 @@ ready = function() {
   var sketch_style = getComputedStyle(sketch);
   canvas.width = parseInt(sketch_style.getPropertyValue('width'));
   canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+
+  //var clear_canvas = document.getElementById('paint');
+
+  document.getElementById('clear').addEventListener('click', function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }, false);
   
   
   // Creating a tmp canvas
@@ -211,6 +226,8 @@ $(tmp_canvas).css({
   };
   
 }();
+
+
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
